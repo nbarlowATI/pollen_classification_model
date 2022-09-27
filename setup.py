@@ -9,7 +9,7 @@ with open("requirements.txt") as f:
             requirements.append(stripped)
 
 setup(
-    name="butterfly_classification_model",
+    name="pollen_classification_model",
     version="0.0.1",
     description="scivision plugin, using EfficientNetB3 model",
     url="https://github.com/nbarlowATI/pollen_classification_model",
