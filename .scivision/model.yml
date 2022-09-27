@@ -1,0 +1,8 @@
+name: pollen_model
+url: https://github.com/nbarlowATI/pollen_classification_model
+import: pollen_classification_model
+model: efficientNetB3
+prediction_fn:
+    call: predict
+    args:
+        X: image
