@@ -13,7 +13,7 @@ setup(
     version="0.0.1",
     description="scivision plugin, using EfficientNetB3 model",
     ### TODO ###
-    url="INSERT URL OF THIS GITHUB REPO HERE",
+    url="https://github.com/lizhiqihhh/pollen_classification_model",
     packages=find_packages(),
     install_requires=requirements,
     python_requires=">=3.7",
