@@ -1,10 +1,12 @@
 import os
+from unittest import result
 import requests
 import numpy as np
 from skimage.transform import resize
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.models import Model
+from tensorflow.keras.applications.imagenet_utils import decode_predictions
 # prevent annoying tensorflow warning
 
 import logging
@@ -19,6 +21,7 @@ def load_model_with_weights(url):
     ### Need to download the weights file from url, if it's not already
     ### present, and put the downloaded filename into a variable
     ### called weights_filename
+    weights_filename = 'https://connectionsworkshop.blob.core.windows.net/pollen/pollen_93.67.h5'
     model = tf.keras.models.load_model(weights_filename)
     return model
 
@@ -47,16 +50,20 @@ class efficientNetB3:
     ### Add a constructor to this class that calls the function
     ### to download the model weights, load the model, and assign
     ### to self.model
-
+    def __init__(self, url):
+        self.model = load_model_with_weights(url)
     def predict(self, image: np.ndarray):
         ### TODO - make sure the image is the correct size, and has
         ### the dimensions expected by the model.
-
+        image = preprocess_image(image)
         result = self.model.predict(image)
         ### TODO ####
         ### Find the highest weight, and, using the list of CLASS_LABELS
         ### get the corresponding class name.
-        return "FIXME"
+        
+        class_name, image_class, class_confidence = decode_predictions(result, top=1)[0][0]
+        return "class info: {} , {} with class confidence: {:.2f}%".format(class_name, image_class, class_confidence * 100)
+        # return "FIXME"
 
 
 
